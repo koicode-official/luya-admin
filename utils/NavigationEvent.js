@@ -21,6 +21,9 @@ function NavigationEvents({ children }) {
     setIsLoading(false);
 
     if (!isAuthenticated && !isPublicRoute(pathname)) {
+      loginHook.saveLoginInfo(false, 0);
+      document.cookie = "_actk" + "=; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+      document.cookie = "_rftk" + "=; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
       router.push('/login');
     }
   }, [pathname, searchParams]);
