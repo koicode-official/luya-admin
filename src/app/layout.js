@@ -5,6 +5,7 @@ import StyledComponentsRegistry from '/utils/StyleRegistry';
 import CommonLayout from '/component/common/CommonLayout';
 import LoadingSpinner from '/component/common/LoadingSpinner';
 import { Suspense } from 'react';
+import NavigationEvents from '../../utils/NavigationEvent';
 
 export default function RootLayout({ children }) {
   return (
@@ -12,13 +13,15 @@ export default function RootLayout({ children }) {
       <body>
         <ReactQueryProvider>
           <RecoilRootProvider>
-            <Suspense fallback={<LoadingSpinner />}>
-              <StyledComponentsRegistry>
-                <CommonLayout>
-                  {children}
-                </CommonLayout>
-              </StyledComponentsRegistry>
-            </Suspense>
+            <NavigationEvents>
+              <Suspense fallback={<LoadingSpinner />}>
+                <StyledComponentsRegistry>
+                  <CommonLayout>
+                    {children}
+                  </CommonLayout>
+                </StyledComponentsRegistry>
+              </Suspense>
+            </NavigationEvents>
           </RecoilRootProvider>
         </ReactQueryProvider>
       </body>

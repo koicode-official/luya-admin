@@ -1,7 +1,7 @@
 "use client"
 import { useEffect, useState } from 'react';
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
-import LoginComponent from '@/component/login/LoginComponent';
+import LoginComponent from '/component/login/LoginComponent';
 import useLoginInfo from './useLoginInfo/useLoginInfo';
 
 function NavigationEvents({ children }) {
@@ -14,8 +14,6 @@ function NavigationEvents({ children }) {
 
   useEffect(async () => {
     const isAuthenticated = await loginHook.fetchLoginInfo();
-    console.log('isAuthenticated', isAuthenticated)
-    console.log('aaaa')
 
     setIsAuthenticated(isAuthenticated);
     setIsLoading(false);
@@ -38,6 +36,8 @@ function NavigationEvents({ children }) {
 
   return children; // 인증된 경우에만 children을 표시
 }
+
+
 
 const isPublicRoute = (pathname) => {
   // 화이트리스트에 포함되어야 하는 공개 페이지 경로를 여기에 정의합니다.
