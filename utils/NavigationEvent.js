@@ -12,18 +12,23 @@ function NavigationEvents({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const loginHook = useLoginInfo();
 
-  useEffect(async () => {
-    const isAuthenticated = await loginHook.fetchLoginInfo();
+  useEffect(() => {
 
-    setIsAuthenticated(isAuthenticated);
-    setIsLoading(false);
+    const loginCheck = async () => {
+      const isAuthenticated = await loginHook.fetchLoginInfo();
 
-    if (!isAuthenticated && !isPublicRoute(pathname)) {
-      loginHook.saveLoginInfo(false, 0);
-      document.cookie = "_actk" + "=; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-      document.cookie = "_rftk" + "=; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-      router.push('/login');
+      setIsAuthenticated(isAuthenticated);
+      setIsLoading(false);
+
+      if (!isAuthenticated && !isPublicRoute(pathname)) {
+        loginHook.saveLoginInfo(false, 0);
+        document.cookie = "_actk" + "=; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+        document.cookie = "_rftk" + "=; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+        router.push('/login');
+      }
     }
+    loginCheck();
+
   }, [pathname, searchParams]);
 
   if (isLoading) {
