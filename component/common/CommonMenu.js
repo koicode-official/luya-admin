@@ -3,6 +3,7 @@
 import styled from "styled-components"
 import { useRouter, usePathname } from "next/navigation"
 import Image from "next/image"
+import logoImage from "/public/img/logo_text05.png"
 import { useEffect, useState } from "react"
 
 const CommonMenuWrapper = styled.div`
@@ -56,7 +57,7 @@ function CommonMenu() {
     <CommonMenuWrapper>
       <CommonMenuContainer>
         <LogoContainer>
-          <Image width={100} height={56} src="/img/logo_text05.png" alt="logo"></Image>
+          <Image width={100} height={56} src={logoImage} alt="logo"></Image>
         </LogoContainer>
         <MenuList>
           <Menu onClick={() => handleRouter("/user")} active={pathName === "/user"}>

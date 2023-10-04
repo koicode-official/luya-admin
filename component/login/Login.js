@@ -8,6 +8,8 @@ import useCustomAxios from "../../utils/UseCustomAxios";
 import useAlert from '/utils/useAlert/UseAlert';
 import useLoginInfo from "/utils/useLoginInfo/useLoginInfo";
 import Image from 'next/image';
+import logoImage from "/public/img/logo_text05.png"
+
 
 
 const LoginContainer = styled.div`
@@ -113,7 +115,7 @@ const Login = () => {
         <LoginTitle>
           <span>어드민</span>
           <ImageContainer>
-            <Image width={200} height={110} src="/img/logo_text05.png" alt="루야"></Image>
+            <Image width={200} height={110} src={logoImage} alt="루야"></Image>
           </ImageContainer>
         </LoginTitle>
         <Input
