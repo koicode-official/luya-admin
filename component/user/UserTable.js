@@ -52,7 +52,7 @@ function UserTable() {
     });
   };
 
-  useQuery('getTotalCount', getTotalCount, {
+  useQuery('getTotalUserCount', getTotalCount, {
     onSuccess: (res) => {
       const data = res.data;
       if (data.status === "success") {

@@ -48,7 +48,7 @@ function PrayTable() {
     });
   };
 
-  useQuery('getTotalCount', getTotalCount, {
+  useQuery('getTotalPrayCount', getTotalCount, {
     onSuccess: (res) => {
       const data = res.data;
       console.log('data', data)

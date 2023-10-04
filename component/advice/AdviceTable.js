@@ -101,7 +101,7 @@ function AdviceTable() {
     });
   };
 
-  useQuery('getTotalCount', getTotalCount, {
+  useQuery('getTotalAdviceCount', getTotalCount, {
     onSuccess: (res) => {
       const data = res.data;
       if (data.message === "success") {
