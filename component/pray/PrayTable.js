@@ -51,7 +51,6 @@ function PrayTable() {
   useQuery('getTotalPrayCount', getTotalCount, {
     onSuccess: (res) => {
       const data = res.data;
-      console.log('data', data)
       if (data.message === "success") {
         setPaginationState(prev => {
           return {

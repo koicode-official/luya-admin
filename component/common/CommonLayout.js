@@ -4,12 +4,11 @@ import styled from "styled-components"
 import CommonMenu from "./CommonMenu";
 import CommonAlert from "./CommonAlert";
 import CommonConfirm from "./CommonConfirm";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useQuery } from 'react-query';
 import useCustomAxios from "../../utils/UseCustomAxios";
 import useLoginInfo from "/utils/useLoginInfo/useLoginInfo";
-import { useRouter } from "next/navigation";
 import useAlert from "/utils/useAlert/UseAlert";
 import useConfirm from "/utils/useConfirm/UseConfirm";
 
@@ -56,7 +55,8 @@ function CommonLayout({ children }) {
   const [userInfo, setUserInfo] = useState();
   const axios = useCustomAxios();
   const loginHook = useLoginInfo();
-  const { alertStateInfo } = useAlert();
+
+  const { alertStateInfo, alert } = useAlert();
   const { confirmStateInfo } = useConfirm();
 
   const getUserInfo = async () => {
@@ -67,7 +67,7 @@ function CommonLayout({ children }) {
     });
   };
 
-  const { refetch } = useQuery('getUserInfo', getUserInfo, {
+  const { refetch: getUserInfoRefetch } = useQuery('getUserInfo', getUserInfo, {
     onSuccess: (res) => {
       const data = res.data;
       if (data.status === "success") {
@@ -76,7 +76,7 @@ function CommonLayout({ children }) {
     },
     onError: (error) => {
       // 로그인 실패 시 에러 처리
-      alertHook.alert("로그인에 실패했습니다. 다시 시도해주세요.", () =>
+      alert.alert("로그인에 실패했습니다. 다시 시도해주세요.", () =>
         router.replace('/login')
       );
       console.error('로그인 실패:', error);
@@ -109,21 +109,38 @@ function CommonLayout({ children }) {
   });
 
   useEffect(() => {
-    refetch();
+    if (pathName === "/admin/login") {
+      getUserInfoRefetch();
+    }
   }, [])
 
 
 
   return (
     <CommonLayoutWrapper>
-
       {alertStateInfo.active === true &&
         <CommonAlert></CommonAlert>
       }
       {confirmStateInfo.active === true &&
         <CommonConfirm></CommonConfirm>
       }
-      {pathName !== "/admin/login" ?
+
+      {pathName && pathName === "/admin/login" ? (
+        <>{children}</>
+      ) : (
+        <>
+          <CommonMenu></CommonMenu>
+          <Contents>
+            <LoginInfo>
+              {userInfo && <p>{userInfo}</p>}
+              <LogOut onClick={() => logOutRefetch()}>로그아웃</LogOut>
+            </LoginInfo>
+            {children}
+          </Contents>
+        </>
+      )}
+
+      {/* {pathName && pathName !== "/login" ?
         <>
           <CommonMenu></CommonMenu>
           <Contents>
@@ -131,7 +148,7 @@ function CommonLayout({ children }) {
               {userInfo &&
                 <p>{userInfo}</p>
               }
-              <LogOut onClick={logOutRefetch}>로그아웃</LogOut>
+              <LogOut onClick={() => logOutRefetch()}>로그아웃</LogOut>
             </LoginInfo>
             {children}
           </Contents>
@@ -140,7 +157,7 @@ function CommonLayout({ children }) {
         <>
           {children}
         </>
-      }
+      } */}
     </CommonLayoutWrapper >
   );
 }

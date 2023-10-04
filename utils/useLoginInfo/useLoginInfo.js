@@ -21,7 +21,7 @@ function useLoginInfo() {
     const expirationDate = new Date().getTime() + expireTime;
     const transaction = db.transaction(["login"], "readwrite");
     const store = transaction.objectStore("login");
-    store.put({ key: "loggedIn", value, expirationDate });
+    store.put({ key: "loggedIn", value, expirationDate, admin: true });
   };
 
   const fetchLoginInfo = async () => {
@@ -32,7 +32,8 @@ function useLoginInfo() {
       const request = store.get("loggedIn");
       request.onsuccess = () => {
         const result = request.result;
-        if (result && new Date().getTime() < result.expirationDate) {
+        console.log('result', result)
+        if (result && new Date().getTime() < result.expirationDate && result.admin === true) {
           resolve(result.value);
         } else {
           resolve(null);

@@ -21,7 +21,7 @@ const LoginContainer = styled.div`
 
 `;
 
-const LoginTitle = styled.h2`
+const LoginTitle = styled.div`
   text-align: center;
 
 
@@ -139,3 +139,22 @@ const Login = () => {
 };
 
 export default Login;
+
+// {pathName && pathName !== "/admin/login" ?
+// <>
+//   <CommonMenu></CommonMenu>
+//   <Contents>
+//     <LoginInfo>
+//       {userInfo &&
+//         <p>{userInfo}</p>
+//       }
+//       <LogOut onClick={()=>logOutRefetch()}>로그아웃</LogOut>
+//     </LoginInfo>
+//     {children}
+//   </Contents>
+// </>
+// :
+// <>
+//   {children}
+// </>
+// }

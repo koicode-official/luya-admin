@@ -12,8 +12,10 @@ function NavigationEvents({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const loginHook = useLoginInfo();
 
-  useEffect(() => {
-    const isAuthenticated = loginHook.fetchLoginInfo();
+  useEffect(async () => {
+    const isAuthenticated = await loginHook.fetchLoginInfo();
+    console.log('isAuthenticated', isAuthenticated)
+    console.log('aaaa')
 
     setIsAuthenticated(isAuthenticated);
     setIsLoading(false);
