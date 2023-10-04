@@ -1,6 +1,6 @@
 "use client"
 import styled from "styled-components"
-import AdvicePresentaion from "../../../component/advice/AdvicePresentation";
+import AdvicePresentaion from "/component/advice/AdvicePresentation";
 const AdviceMainWrapper = styled.div``
 
 function AdviceMain() {
