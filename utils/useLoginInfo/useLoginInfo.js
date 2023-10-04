@@ -32,8 +32,7 @@ function useLoginInfo() {
       const request = store.get("loggedIn");
       request.onsuccess = () => {
         const result = request.result;
-        console.log('result', result)
-        if (result && new Date().getTime() < result.expirationDate && result.admin === true) {
+        if (result && new Date().getTime() < result.expirationDate && result.admin && result.admin === true) {
           resolve(result.value);
         } else {
           resolve(null);
