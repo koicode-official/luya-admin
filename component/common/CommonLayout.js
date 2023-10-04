@@ -123,7 +123,7 @@ function CommonLayout({ children }) {
       {confirmStateInfo.active === true &&
         <CommonConfirm></CommonConfirm>
       }
-      {pathName !== "/login" ?
+      {pathName !== "/admin/login" ?
         <>
           <CommonMenu></CommonMenu>
           <Contents>

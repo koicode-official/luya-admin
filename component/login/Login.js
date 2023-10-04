@@ -116,7 +116,6 @@ const Login = () => {
             <Image width={200} height={110} src="/img/logo_text05.png" alt="루야"></Image>
           </ImageContainer>
         </LoginTitle>
-
         <Input
           type="email"
           placeholder="이메일"

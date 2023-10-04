@@ -59,13 +59,13 @@ function CommonMenu() {
           <Image width={100} height={56} src="/img/logo_text05.png" alt="logo"></Image>
         </LogoContainer>
         <MenuList>
-          <Menu onClick={() => handleRouter("/admin/user")} active={pathName === "/admin/user"}>
+          <Menu onClick={() => handleRouter("/user")} active={pathName === "/user"}>
             유저
           </Menu>
-          <Menu onClick={() => handleRouter("/admin/pray")} active={pathName === "/admin/pray"}>
+          <Menu onClick={() => handleRouter("/pray")} active={pathName === "/pray"}>
             기도제목
           </Menu>
-          <Menu onClick={() => handleRouter("/admin/advice")} active={pathName === "/admin/advice"}>
+          <Menu onClick={() => handleRouter("/advice")} active={pathName === "/advice"}>
             성경AI
           </Menu>
         </MenuList>
